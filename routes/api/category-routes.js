@@ -32,13 +32,12 @@ router.get('/:id', async (req, res) => {
     });
 
     if (!catData) {
-      res.status(404).json({ message: 'No location found with this id!' });
+      res.status(404).json({ message: 'No Category found with this id!' });
       return;
     }
 
     res.status(200).json(catData);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
   // find one category by its `id` value
