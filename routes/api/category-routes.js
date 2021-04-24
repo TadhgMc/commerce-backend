@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
     });
     res.status(200).json(categoryData);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
   // find all categories
@@ -68,7 +67,6 @@ router.put('/:id', async (req, res) => {
       res.json(dbCategoryData);
       
     } catch(err) {
-      console.log(err);
       res.status(500).json(err);
     };
     // update a category by its `id` value

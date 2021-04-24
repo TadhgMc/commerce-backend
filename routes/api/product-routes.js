@@ -13,11 +13,12 @@ router.get('/', async (req, res) => {
       include: [{
         model: Category,
         attributes: ['category_name'],
-      }],
-      include: [{
+      },
+      {
         model: Tag,
         attributes: ['tag_name'],
-      }],
+      },
+    ],
     });
 
     if(!allProductsData) {
@@ -41,12 +42,17 @@ router.get('/:id', async (req, res) => {
       include: [{
         model: Category,
         attributes: ['category_name'],
-      }],
-      include: [{
+      },
+      {
         model: Tag,
         attributes: ['tag_name'],
-      }],
+      },
+    ],
     });
+    if (!productData) {
+      res.status(404).json({ message: 'No Tag found with this id' });
+      return;
+    };
     res.status(200).json(productData);
   } catch (err) {
     res.status(500).json(err);
@@ -80,7 +86,6 @@ router.post('/', (req, res) => {
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
-      console.log(err);
       res.status(400).json(err);
     });
 });
@@ -122,7 +127,6 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
       res.status(400).json(err);
     });
 });
